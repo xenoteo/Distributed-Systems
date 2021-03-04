@@ -7,12 +7,12 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 
-public class JavaTcpServerClientChannel implements Runnable{
+public class ServerClientTcpChannel implements Runnable{
     private final List<Socket> allClients;
     private BufferedReader in;
     private final int clientId;
 
-    public JavaTcpServerClientChannel(Socket clientSocket, List<Socket> allClients) {
+    public ServerClientTcpChannel(Socket clientSocket, List<Socket> allClients) {
         this.allClients = allClients;
         clientId = clientSocket.getPort();
         try {
@@ -26,18 +26,17 @@ public class JavaTcpServerClientChannel implements Runnable{
     public void run() {
         try {
             while (true) {
-                String msg = in.readLine();
-                if (msg != null && msg.equals("Finishing the transmission...")){
+                String tcpMsg = in.readLine();
+                if (tcpMsg == null || tcpMsg.equals(Client.FINISH_MSG)){
                     System.out.printf("Client %d disconnected\n", clientId);
                     in.close();
                     break;
                 }
-                if (msg != null){
-                    System.out.printf("Received msg from client %d: %s\n", clientId, msg);
-                    for (Socket client : allClients) {
-                        PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-                        out.printf("Client %d send msg \"%s\"\n", clientId, msg);
-                    }
+
+                System.out.printf("Received msg from client %d: %s\n", clientId, tcpMsg);
+                for (Socket client : allClients) {
+                    PrintWriter out = new PrintWriter(client.getOutputStream(), true);
+                    out.printf("Client %d send msg: %s\n", clientId, tcpMsg);
                 }
             }
         } catch (IOException e) {

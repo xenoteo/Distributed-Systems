@@ -5,13 +5,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-public class JavaTcpClientIn implements Runnable{
+public class ClientInTcp implements Runnable{
     private BufferedReader in;
     private boolean running;
 
-    public JavaTcpClientIn(Socket socket) {
+    public ClientInTcp(Socket tcpSocket) {
         try {
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            in = new BufferedReader(new InputStreamReader(tcpSocket.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -22,10 +22,10 @@ public class JavaTcpClientIn implements Runnable{
     public void run() {
         try {
             while (running){
-                String response = in.readLine();
-                if (response != null) {
+                String tcpResponse = in.readLine();
+                if (tcpResponse != null) {
                     System.out.print("\u001B[34m");
-                    System.out.printf("RECEIVED MESSAGE: %s\n", response);
+                    System.out.printf("[RECEIVED MESSAGE] %s\n", tcpResponse);
                     System.out.print("\u001B[0m");
                 }
             }
