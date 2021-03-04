@@ -8,35 +8,34 @@ import java.net.Socket;
 import java.util.List;
 
 public class ServerClientTcpChannel implements Runnable{
+    private final Socket clientSocket;
     private final List<Socket> allClients;
-    private BufferedReader in;
     private final int clientId;
 
     public ServerClientTcpChannel(Socket clientSocket, List<Socket> allClients) {
+        this.clientSocket = clientSocket;
         this.allClients = allClients;
         clientId = clientSocket.getPort();
-        try {
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void run() {
         try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             while (true) {
                 String tcpMsg = in.readLine();
                 if (tcpMsg == null || tcpMsg.equals(Client.FINISH_MSG)){
-                    System.out.printf("Client %d disconnected\n", clientId);
+                    ColoredOutput.printlnPurple("[CLIENT DISCONNECTED] " + clientId);
                     in.close();
+                    allClients.remove(clientSocket);
                     break;
                 }
 
-                System.out.printf("Received msg from client %d: %s\n", clientId, tcpMsg);
+                ColoredOutput.printlnBlue("[RECEIVED MESSAGE] " + clientId + ":\n" + tcpMsg);
                 for (Socket client : allClients) {
+                    if (client.getPort() == clientId) continue;
                     PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-                    out.printf("Client %d send msg: %s\n", clientId, tcpMsg);
+                    out.printf("%d:\n%s\n", clientId, tcpMsg);
                 }
             }
         } catch (IOException e) {

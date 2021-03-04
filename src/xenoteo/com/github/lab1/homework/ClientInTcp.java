@@ -22,12 +22,8 @@ public class ClientInTcp implements Runnable{
     public void run() {
         try {
             while (running){
-                String tcpResponse = in.readLine();
-                if (tcpResponse != null) {
-                    System.out.print("\u001B[34m");
-                    System.out.printf("[RECEIVED MESSAGE] %s\n", tcpResponse);
-                    System.out.print("\u001B[0m");
-                }
+                String tcpMsg = in.readLine();
+                ColoredOutput.printlnBlue("[RECEIVED MESSAGE] " + tcpMsg);  // bullshit
             }
         } catch (IOException e) {
             e.printStackTrace();

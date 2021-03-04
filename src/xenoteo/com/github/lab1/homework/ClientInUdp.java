@@ -20,10 +20,8 @@ public class ClientInUdp implements Runnable{
                 byte[] receiveBuffer = new byte[1024];
                 DatagramPacket receivePacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
                 udpSocket.receive(receivePacket);
-                String udpResponse = new String(receiveBuffer);
-                System.out.print("\u001B[34m");
-                System.out.printf("[RECEIVED MESSAGE] %s\n", udpResponse);
-                System.out.print("\u001B[0m");
+                String udpMsg = new String(receiveBuffer);
+                ColoredOutput.printlnBlue("[RECEIVED MESSAGE] " + udpMsg);
             }
         } catch (IOException e) {
         }

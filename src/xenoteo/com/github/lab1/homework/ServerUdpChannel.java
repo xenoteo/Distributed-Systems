@@ -8,13 +8,11 @@ import java.net.Socket;
 import java.util.Arrays;
 import java.util.List;
 
-public class ServerClientUdpChannel implements Runnable{
-    private final int clientId;
+public class ServerUdpChannel implements Runnable{
     private final List<Socket> allClients;
     private final DatagramSocket serverUdpSocket;
 
-    public ServerClientUdpChannel(int clientId, List<Socket> allClients, DatagramSocket serverUdpSocket) {
-        this.clientId = clientId;
+    public ServerUdpChannel(List<Socket> allClients, DatagramSocket serverUdpSocket) {
         this.allClients = allClients;
         this.serverUdpSocket = serverUdpSocket;
     }
@@ -34,10 +32,12 @@ public class ServerClientUdpChannel implements Runnable{
                 }
 
                 String udpMsg = new String(receiveBuffer);
-                System.out.printf("Received msg from client %d:\n%s\n", clientId, udpMsg);
+                int senderId = receivePacket.getPort() - 1;
+                ColoredOutput.printlnBlue("[RECEIVED MESSAGE] " + senderId + ":\n" + udpMsg);
 
-                byte[] sendBuffer = ("Client " + clientId + " send msg:\n" + udpMsg + "\n").getBytes();
+                byte[] sendBuffer = (senderId + ":\n" + udpMsg + "\n").getBytes();
                 for (Socket client : allClients) {
+                    if (client.getPort() == senderId) continue;
                     DatagramPacket sendPacket =
                             new DatagramPacket(sendBuffer, sendBuffer.length, address, client.getPort() + 1);
                     serverUdpSocket.send(sendPacket);
@@ -47,5 +47,4 @@ public class ServerClientUdpChannel implements Runnable{
             e.printStackTrace();
         }
     }
-
 }
