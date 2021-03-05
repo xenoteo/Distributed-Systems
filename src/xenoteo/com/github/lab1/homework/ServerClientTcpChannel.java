@@ -35,7 +35,7 @@ public class ServerClientTcpChannel implements Runnable{
                 for (Socket client : allClients) {
                     if (client.getPort() == clientId) continue;
                     PrintWriter out = new PrintWriter(client.getOutputStream(), true);
-                    out.printf("%d:\n%s\n", clientId, tcpMsg);
+                    out.printf("%d: %s\n", clientId, tcpMsg);
                 }
             }
         } catch (IOException e) {

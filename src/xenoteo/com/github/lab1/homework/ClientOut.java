@@ -20,7 +20,8 @@ public class ClientOut implements Runnable{
     private final InetAddress address;
     private final int portNumber;
     private final InetAddress multicastAddress;
-    protected final int multicastPortNumber;
+    private final int multicastPortNumber;
+    private Scanner input;
 
     public ClientOut(Socket tcpSocket,
                      ClientInTcp clientInTcp, ClientInUdp clientInUdp, ClientInMulticast clientInMulticast,
@@ -36,13 +37,13 @@ public class ClientOut implements Runnable{
         this.portNumber = portNumber;
         this.multicastAddress = multicastAddress;
         this.multicastPortNumber = multicastPortNumber;
+        this.input = new Scanner(System.in);
     }
 
     @Override
     public void run() {
         try {
             PrintWriter out = new PrintWriter(tcpSocket.getOutputStream(), true);
-            Scanner input = new Scanner(System.in);
             while (true) {
                 System.out.println("Enter the message (q to stop, u to use UDP transmission, m to use multicast):");
                 String msg = input.nextLine();
@@ -53,9 +54,7 @@ public class ClientOut implements Runnable{
                     DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, address, portNumber);
                     udpSocket.send(sendPacket);
 
-                    clientInTcp.finish();
-                    clientInUdp.finish();
-                    clientInMulticast.finish();
+                    finish();
                     break;
                 }
                 else if (msg.equals("u")){
@@ -103,5 +102,12 @@ public class ClientOut implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void finish(){
+        clientInTcp.finish();
+        clientInUdp.finish();
+        clientInMulticast.finish();
+        input.close();
     }
 }

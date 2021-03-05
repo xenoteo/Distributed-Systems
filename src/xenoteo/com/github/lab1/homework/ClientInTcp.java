@@ -8,6 +8,7 @@ import java.net.Socket;
 public class ClientInTcp implements Runnable{
     private BufferedReader in;
     private boolean running;
+    private ClientOut clientOut;
 
     public ClientInTcp(Socket tcpSocket) {
         try {
@@ -18,16 +19,30 @@ public class ClientInTcp implements Runnable{
         running = true;
     }
 
+    public void setClientOut(ClientOut clientOut) {
+        this.clientOut = clientOut;
+    }
+
     @Override
     public void run() {
         try {
             while (running){
                 String tcpMsg = in.readLine();
-                ColoredOutput.printlnBlue("[RECEIVED MESSAGE] " + tcpMsg);  // bullshit
+                if (tcpMsg == null) { // if thread should already be closed or if the server has died
+                    clientOut.finish();
+                    in.close();
+                    break;
+                }
+                ColoredOutput.printlnBlue("[RECEIVED MESSAGE] " + reformatMsg(tcpMsg));
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String reformatMsg(String msg){
+        int spaceIndex = msg.indexOf(' ');
+        return msg.substring(0, spaceIndex) + "\n" + msg.substring(spaceIndex + 1);
     }
 
     public void finish(){

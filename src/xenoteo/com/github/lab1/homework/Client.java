@@ -32,11 +32,11 @@ public class Client {
             ClientInUdp clientInUdp = new ClientInUdp(udpSocket);
             ClientInMulticast clientInMulticast =
                     new ClientInMulticast(multicastSocket, clientId + 1);
-            ClientOut clientOut =
-                    new ClientOut(tcpSocket,
+            ClientOut clientOut = new ClientOut(tcpSocket,
                             clientInTcp, clientInUdp, clientInMulticast,
                             udpSocket, address, portNumber,
                             group, multicastPortNumber);
+            clientInTcp.setClientOut(clientOut);
             new Thread(clientOut).start();
             new Thread(clientInTcp).start();
             new Thread(clientInMulticast).start();
