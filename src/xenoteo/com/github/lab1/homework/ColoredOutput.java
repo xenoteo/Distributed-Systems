@@ -40,4 +40,9 @@ public class ColoredOutput {
         System.out.print(ANSI_PURPLE);
         printlnAndReset(string);
     }
+
+    public static void printlnRed(String string){
+        System.out.print(ANSI_RED);
+        printlnAndReset(string);
+    }
 }

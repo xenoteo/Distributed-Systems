@@ -101,6 +101,8 @@ public class ClientOut implements Runnable{
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (IllegalStateException e){
+            ColoredOutput.printlnRed("[SERVER DISCONNECTED]");
         }
     }
 

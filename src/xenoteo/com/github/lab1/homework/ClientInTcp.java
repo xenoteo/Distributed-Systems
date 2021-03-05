@@ -9,8 +9,10 @@ public class ClientInTcp implements Runnable{
     private BufferedReader in;
     private boolean running;
     private ClientOut clientOut;
+    private final Socket tcpSocket;
 
     public ClientInTcp(Socket tcpSocket) {
+        this.tcpSocket = tcpSocket;
         try {
             in = new BufferedReader(new InputStreamReader(tcpSocket.getInputStream()));
         } catch (IOException e) {
@@ -30,7 +32,6 @@ public class ClientInTcp implements Runnable{
                 String tcpMsg = in.readLine();
                 if (tcpMsg == null) { // if thread should already be closed or if the server has died
                     clientOut.finish();
-                    in.close();
                     break;
                 }
                 ColoredOutput.printlnBlue("[RECEIVED MESSAGE] " + reformatMsg(tcpMsg));
