@@ -1,4 +1,6 @@
-package xenoteo.com.github.lab1.homework;
+package xenoteo.com.github.lab1.homework.server;
+
+import xenoteo.com.github.lab1.homework.ColoredOutput;
 
 import java.io.IOException;
 import java.net.*;
@@ -19,13 +21,18 @@ public class Server {
         int multicastPortNumber = 1234;
 
         try {
+            // initializing TCP and UDP sockets
             serverTcpSocket = new ServerSocket(portNumber);
             serverUdpSocket = new DatagramSocket(portNumber);
+
+            // initializing the list of clients' sockets
             List<Socket> clients = new LinkedList<>();
 
+            // creating and starting UDP channel receiving UDP messages
             ServerUdpChannel udpChannel = new ServerUdpChannel(clients, serverUdpSocket);
             new Thread(udpChannel).start();
 
+            // creating and starting channel receiving multicast messages
             InetAddress group = InetAddress.getByName(multicastAddress);
             multicastSocket = new MulticastSocket(multicastPortNumber);
             multicastSocket.joinGroup(group);
@@ -33,9 +40,12 @@ public class Server {
             new Thread(multicastChannel).start();
 
             while (true) {
+                // accepting a new client and adding it to the list of clients
                 Socket clientSocket = serverTcpSocket.accept();
                 clients.add(clientSocket);
                 ColoredOutput.printlnGreen("[NEW CLIENT CONNECTED] " + clientSocket.getPort());
+
+                // creating and starting a personal client's channel for communication with the server
                 ServerClientTcpChannel tcpChannel = new ServerClientTcpChannel(clientSocket, clients);
                 new Thread(tcpChannel).start();
             }
@@ -52,7 +62,6 @@ public class Server {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

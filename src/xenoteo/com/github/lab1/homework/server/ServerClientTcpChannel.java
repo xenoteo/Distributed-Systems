@@ -1,4 +1,7 @@
-package xenoteo.com.github.lab1.homework;
+package xenoteo.com.github.lab1.homework.server;
+
+import xenoteo.com.github.lab1.homework.ColoredOutput;
+import xenoteo.com.github.lab1.homework.client.Client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,9 +10,21 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 
+/**
+ * The server runnable for server-client one-to-one communication.
+ */
 public class ServerClientTcpChannel implements Runnable{
+    /**
+     * The client's socket.
+     */
     private final Socket clientSocket;
+    /**
+     * The list of all the clients.
+     */
     private final List<Socket> allClients;
+    /**
+     * The client's ID.
+     */
     private final int clientId;
 
     public ServerClientTcpChannel(Socket clientSocket, List<Socket> allClients) {
@@ -24,6 +39,7 @@ public class ServerClientTcpChannel implements Runnable{
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             while (true) {
                 String tcpMsg = in.readLine();
+                // if client is dead or if client is going to finish the transmission
                 if (tcpMsg == null || tcpMsg.equals(Client.FINISH_MSG)){
                     ColoredOutput.printlnPurple("[CLIENT DISCONNECTED] " + clientId);
                     in.close();
@@ -31,6 +47,7 @@ public class ServerClientTcpChannel implements Runnable{
                     break;
                 }
 
+                // outputting the message and sending the message to all the other clients
                 ColoredOutput.printlnBlue("[RECEIVED MESSAGE] " + clientId + ":\n" + tcpMsg);
                 for (Socket client : allClients) {
                     if (client.getPort() == clientId) continue;
