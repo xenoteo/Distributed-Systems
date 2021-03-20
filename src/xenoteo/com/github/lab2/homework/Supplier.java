@@ -35,7 +35,6 @@ public class Supplier {
         supplierName = readSupplierName();
         supplierPrefix = supplierName
                 .replaceAll("\\p{Punct}", "").replaceAll("\\s", "") + "-";
-        System.out.println(supplierPrefix);
     }
 
     public static void main(String[] argv) {
@@ -58,20 +57,33 @@ public class Supplier {
             // setting up the QoS
             channel.basicQos(1);
 
-            // setting up the exchange
+            // setting up the basic exchange
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
-
-            // creating the consumer for receiving and handling requests from squads and sending the confirmations
-            Consumer consumer = createSupplierConsumer(channel);
 
             // reading the equipment supplied by the supplier
             Set<String> equipment = readEquipment();
 
-            // start receiving requests on each equipment item's channel
+            // setting up the admin exchange and declaring queue for sending messages to admin
+            channel.exchangeDeclare(Admin.ADMIN_EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
+            channel.queueDeclare(Admin.ADMIN_IN_QUEUE, false, false, false, null);
+
+            // setting up the queue for receiving messages from admin
+            String adminQueueName = channel.queueDeclare().getQueue();
+            channel.queueBind(adminQueueName, Admin.ADMIN_EXCHANGE_NAME, Admin.ADMIN_OUT_KEY);
+            channel.queueBind(adminQueueName, Admin.ADMIN_EXCHANGE_NAME, Admin.ADMIN_SUPPLIERS_KEY);
+
+            // creating admin consumer and starting receiving messages from admin
+            Consumer adminConsumer = createAdminConsumer(channel);
+            channel.basicConsume(adminQueueName, true, adminConsumer);
+
+            // creating consumer for receiving and handling requests from squads and sending the confirmations
+            // and start receiving requests on each equipment item's channel
+            Consumer consumer = createSupplierConsumer(channel);
             for (String queueName : equipment){
                 channel.queueDeclare(queueName, false, false, false, null);
                 channel.basicConsume(queueName, false, consumer);
             }
+
         } catch (IOException | TimeoutException e) {
             e.printStackTrace();
         }
@@ -109,8 +121,12 @@ public class Supplier {
                     String confirmation = String.format("%s (commission %s)", item, commissionNumber);
 
                     // creating the queue for sending the confirmation to the squad and sending it
+                    byte[] messageBytes = confirmation.getBytes(StandardCharsets.UTF_8);
                     channel.queueDeclare(squad, false, false, false, null);
-                    channel.basicPublish("", squad, null, confirmation.getBytes(StandardCharsets.UTF_8));
+                    channel.basicPublish("", squad, null, messageBytes);
+
+                    // sending the same message to admin
+                    channel.basicPublish("", Admin.ADMIN_IN_QUEUE, null, messageBytes);
 
                     // confirming the request
                     channel.basicAck(envelope.getDeliveryTag(), false);
@@ -144,5 +160,19 @@ public class Supplier {
         return equipment;
     }
 
-
+    /**
+     * Creates a consumer for receiving messages from admin.
+     *
+     * @param channel  the channel
+     * @return the admin consumer
+     */
+    private Consumer createAdminConsumer(Channel channel){
+        return new DefaultConsumer(channel) {
+            @Override
+            public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) {
+                String message = new String(body, StandardCharsets.UTF_8);
+                ColoredOutput.printlnBlue(String.format("RECEIVED FROM ADMIN: %s", message));
+            }
+        };
+    }
 }
