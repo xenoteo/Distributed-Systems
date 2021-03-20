@@ -78,6 +78,7 @@ public class Squad {
                 System.out.printf("Sent request for %s\n", item);
             }
 
+            // closing the connection
             channel.close();
             connection.close();
         } catch (IOException | TimeoutException e) {
