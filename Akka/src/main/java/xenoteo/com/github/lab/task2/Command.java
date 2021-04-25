@@ -1,4 +1,4 @@
-package lab.task2;
+package xenoteo.com.github.lab.task2;
 
 public interface Command {
 

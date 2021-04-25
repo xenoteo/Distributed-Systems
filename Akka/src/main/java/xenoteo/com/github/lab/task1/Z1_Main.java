@@ -1,4 +1,4 @@
-package lab.task1;
+package xenoteo.com.github.lab.task1;
 
 import akka.actor.typed.ActorSystem;
 

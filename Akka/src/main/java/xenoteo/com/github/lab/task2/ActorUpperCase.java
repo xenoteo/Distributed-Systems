@@ -1,4 +1,4 @@
-package lab.task2;
+package xenoteo.com.github.lab.task2;
 
 import akka.actor.typed.Behavior;
 import akka.actor.typed.javadsl.AbstractBehavior;
@@ -15,8 +15,6 @@ public class ActorUpperCase extends AbstractBehavior<String>{
     public static final ServiceKey<String> upperCaseServiceKey =
             ServiceKey.create(String.class, "upperCaseService");
 
-
-    // --- constructor and create
     public ActorUpperCase(ActorContext<String> context) {
         super(context);
     }
@@ -34,7 +32,6 @@ public class ActorUpperCase extends AbstractBehavior<String>{
         );
     }
 
-    // --- define message handlers
     @Override
     public Receive<String> createReceive() {
         return newReceiveBuilder()

@@ -1,4 +1,4 @@
-package lab.task2;
+package xenoteo.com.github.lab.task2;
 
 import akka.actor.typed.ActorRef;
 import akka.actor.typed.Behavior;
@@ -31,7 +31,6 @@ public class ActorTextService extends AbstractBehavior<Command>  {
         return Behaviors.setup(ActorTextService::new);
     }
 
-    // --- define message handlers
     @Override
     public Receive<Command> createReceive() {
 
