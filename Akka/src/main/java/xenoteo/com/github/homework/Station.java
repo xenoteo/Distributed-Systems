@@ -2,12 +2,10 @@ package xenoteo.com.github.homework;
 
 import akka.actor.typed.ActorSystem;
 import akka.actor.typed.Behavior;
-import akka.actor.typed.DispatcherSelector;
 import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import com.typesafe.config.Config;
 
 import java.util.Map;
 
