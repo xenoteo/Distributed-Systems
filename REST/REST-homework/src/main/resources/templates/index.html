@@ -2,55 +2,43 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Movie API</title>
+    <title>Brewery API</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
 <body>
 
-<div class="container pb-3">
-    <form th:action="@{/create_user}">
-        <div class="form-group">
-            <label for="firstName">Imię:</label>
-            <input type="text" class="form-control" id="firstName" th:name="firstName">
-        </div>
-        <div class="form-group">
-            <label for="lastName">Nazwisko:</label>
-            <input type="text" class="form-control" id="lastName" th:name="lastName">
-        </div>
-        <div class="form-group">
-            <label for="email">E-mail:</label>
-            <input type="text" class="form-control" id="email" th:name="email">
-        </div>
-        <div class="form-group">
-            <label for="password">Hasło:</label>
-            <input type="text" class="form-control" id="password" th:name="password">
-        </div>
-        <div class="form-group">
-            <label for="password">Index:</label>
-            <label for="index"></label><input type="text" class="form-control" id="index" th:name="index">
-        </div>
-        <div class="form-group">
-            <label>Rola:</label>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="role1" name="role1" class="custom-control-input" value="1" th:name="role">
-                <label class="custom-control-label" for="role1">Student</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="role2" name="role2" class="custom-control-input" value="2" th:name="role">
-                <label class="custom-control-label" for="role2">Prowadzący</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="role3" name="role3" class="custom-control-input" value="3" th:name="role">
-                <label class="custom-control-label" for="role3">Administrator</label>
-            </div>
-        </div>
+<section class="container py-3">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-4 pb-2 mb-0" style="border-top: 3px solid #343a40;">
+    </header>
+</section>
 
-        <div class="pt-3">
-            <button type="submit" class="btn btn-primary">Zarejestruj</button>
-        </div>
-    </form>
-</div>
+<section class="container py-3">
+    <div class="container pb-3">
+        <form th:action="@{/result}" method="post">
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" class="form-control" id="city" th:name="city">
+            </div>
+            <div class="form-group">
+                <label for="type">Type:</label>
+                <input type="text" class="form-control" id="type" th:name="type">
+            </div>
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" class="form-control" id="state" th:name="state">
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" th:name="name">
+            </div>
+
+            <div class="pt-3">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+</section>
 
 <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>

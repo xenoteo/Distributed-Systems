@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Brewery API</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+
+<section class="container py-3">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-4 pb-2 mb-0" style="border-top: 3px solid #343a40;">
+        <div class="text-end">
+            <a type="button" class="btn btn-primary" href="index">Back</a>
+        </div>
+    </header>
+</section>
+
+<section class="container py-3">
+    <div class="container pb-3">
+
+        <tbody th:each="brewery, iterStat : ${breweries}">
+        <hr>
+        <dl class="row">
+            <dd class="col-sm-3">Name</dd>
+            <dd class="col-sm-9" th:text="${brewery.getName()}"></dd>
+
+            <dd class="col-sm-3">Brewery type</dd>
+            <dd class="col-sm-9" th:text="${brewery.getBrewery_type()} == null ? '-' : ${brewery.getBrewery_type()}"></dd>
+
+            <dd class="col-sm-3">Street</dd>
+            <dd class="col-sm-9" th:text="${brewery.getStreet()} == null ? '-' : ${brewery.getStreet()}"></dd>
+
+            <dd class="col-sm-3">City</dd>
+            <dd class="col-sm-9" th:text="${brewery.getCity()} == null ? '-' : ${brewery.getCity()}"></dd>
+
+            <dd class="col-sm-3">State</dd>
+            <dd class="col-sm-9" th:text="${brewery.getState()} == null ? '-' : ${brewery.getState()}"></dd>
+
+            <dd class="col-sm-3">Postal code</dd>
+            <dd class="col-sm-9" th:text="${brewery.getPostal_code()} == null ? '-' : ${brewery.getPostal_code()}"></dd>
+
+            <dd class="col-sm-3">Country</dd>
+            <dd class="col-sm-9" th:text="${brewery.getCountry()} == null ? '-' : ${brewery.getCountry()}"></dd>
+
+            <dd class="col-sm-3">Website</dd>
+            <dd class="col-sm-9" th:text="${brewery.getWebsite_url()} == null ? '-' : ${brewery.getWebsite_url()}"></dd>
+
+        </dl>
+    </div>
+</section>
+
+
+
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
