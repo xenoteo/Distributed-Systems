@@ -18,7 +18,37 @@
 
 <section class="container py-3">
     <div class="container pb-3">
+        <h3>While drinking beer you can try...</h3>
+        <dl class="row">
+            <dd class="col-sm-3">Description</dd>
+            <dt class="col-sm-9" th:text="${activity.getActivity()}"></dt>
 
+            <dd class="col-sm-3">Activity type</dd>
+            <dd class="col-sm-9" th:text="${activity.getType()} == null ? '-' : ${activity.getType()}"></dd>
+
+            <dd class="col-sm-3">Participants</dd>
+            <dd class="col-sm-9" th:text="${activity.getParticipants()} == null ? '-' : ${activity.getParticipants()}"></dd>
+
+            <dd class="col-sm-3">Price</dd>
+            <dd class="col-sm-9" th:text="${activity.getPrice()} == null ? '-' : ${activity.getPrice()}"></dd>
+
+            <dd class="col-sm-3">Website</dd>
+            <dd class="col-sm-9" th:text="${activity.getLink()}"></dd>
+        </dl>
+    </div>
+</section>
+
+<section class="container py-3">
+    <div class="container pb-3">
+        <h3>The most frequent word in brewery names</h3>
+        <p>The most frequent word in names of breweries appropriate for your request is...</p>
+        <dt th:text="${word}"></dt>
+    </div>
+</section>
+
+<section class="container py-3">
+    <div class="container pb-3">
+        <h3>Breweries appropriate for your request:</h3>
         <tbody th:each="brewery, iterStat : ${breweries}">
         <hr>
         <dl class="row">

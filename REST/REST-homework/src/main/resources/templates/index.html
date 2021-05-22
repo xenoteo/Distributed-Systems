@@ -22,7 +22,20 @@
             </div>
             <div class="form-group">
                 <label for="type">Type:</label>
-                <input type="text" class="form-control" id="type" th:name="type">
+                <br>
+                <select id="type" th:name="type">
+                    <option value=""></option>
+                    <option value="micro">Micro</option>
+                    <option value="nano">Nano</option>
+                    <option value="regional">Regional</option>
+                    <option value="brewpub">Brewpub</option>
+                    <option value="large">Large</option>
+                    <option value="planning">Planning</option>
+                    <option value="bar">Bar</option>
+                    <option value="contract">Contract</option>
+                    <option value="proprietor">Proprietor</option>
+                    <option value="closed">Closed</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="state">State:</label>
@@ -31,6 +44,21 @@
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" id="name" th:name="name">
+            </div>
+            <div class="form-group">
+                <label for="activity">What do you want to drink beer for?</label>
+                <br>
+                <select id="activity" th:name="activity">
+                    <option value="relaxation">Relaxation</option>
+                    <option value="recreational">Recreational</option>
+                    <option value="education">Education</option>
+                    <option value="social">Social</option>
+                    <option value="cooking">Cooking</option>
+                    <option value="diy">Diy</option>
+                    <option value="charity">Charity</option>
+                    <option value="music">Music</option>
+                    <option value="busywork">Busywork</option>
+                </select>
             </div>
 
             <div class="pt-3">

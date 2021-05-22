@@ -23,18 +23,15 @@ public class WebController {
     }
 
     /**
-     * https://api.openbrewerydb.org/breweries?by_city=san_diego
-     *
-     * https://api.openbrewerydb.org/breweries?by_name=cooper
-     *
-     * https://api.openbrewerydb.org/breweries?by_state=ohio
-     * https://api.openbrewerydb.org/breweries?by_state=new_york
-     * https://api.openbrewerydb.org/breweries?by_state=new%20mexico
-     *
-     * https://api.openbrewerydb.org/breweries?by_type=micro
-     *
      * https://api.openbrewerydb.org/breweries?by_state=ohio&sort=type,+name
      * https://api.openbrewerydb.org/breweries?by_city=san_diego&sort=-name
+     *
+     * https://api.openbrewerydb.org/breweries/search?query=dog
+     *
+     * wyciągnięcie średniej, znalezienie ekstremów, porównanie wartości z różnych serwisów itp.
+     *
+     * https://www.boredapi.com/
+     * https://www.boredapi.com/api/activity?type=recreational
      *
      * @param model
      * @param principal
@@ -45,9 +42,21 @@ public class WebController {
                              @RequestParam(value = "type") String type,
                              @RequestParam(value = "state") String state,
                              @RequestParam(value = "name") String name,
+                             @RequestParam(value = "activity") String activityType,
                              Model model,
                              Principal principal) {
 
+        Brewery[] breweries = requestBreweries(city, type, state, name);
+        Activity activity = requestActivity(activityType);
+
+        model.addAttribute("breweries", breweries);
+        model.addAttribute("activity", activity);
+        model.addAttribute("word", "beer".toUpperCase());
+
+        return "result";
+    }
+
+    private String createRequestUri(String city, String type, String state, String name){
         StringBuilder uriBuilder = new StringBuilder("https://api.openbrewerydb.org/breweries?");
 
         if (city != null && !city.isEmpty()){
@@ -75,12 +84,27 @@ public class WebController {
             uriBuilder.append("&");
         }
 
+        return uriBuilder.toString();
+    }
+
+    private Brewery[] requestBreweries(String city, String type, String state, String name){
+        String uri = createRequestUri(city, type, state, name);
         RestTemplate restTemplate = new RestTemplate();
-        Brewery[] breweries = restTemplate.getForObject(uriBuilder.toString(), Brewery[].class);
+        return restTemplate.getForObject(uri, Brewery[].class);
+    }
 
-        model.addAttribute("breweries", breweries);
+    private Activity requestActivity(String activityType){
+        RestTemplate restTemplate = new RestTemplate();
 
-        return "result";
+        String activityUri = String.format("https://www.boredapi.com/api/activity?type=%s", activityType);
+        Activity activity = restTemplate.getForObject(activityUri, Activity.class);
+
+        assert activity != null;
+        if (activity.getLink() == null || activity.getLink().isEmpty()){
+            activity.setLink("-");
+        }
+
+        return activity;
     }
 
 }
