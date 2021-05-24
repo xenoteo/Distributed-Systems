@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * The class representing an activity to perform while drinking beer.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter

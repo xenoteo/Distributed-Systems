@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * The class representing a brewery.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter

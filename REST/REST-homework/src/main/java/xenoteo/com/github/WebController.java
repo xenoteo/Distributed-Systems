@@ -7,55 +7,70 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import java.security.Principal;
-
-
+/**
+ * The controller handling requests.
+ */
 @Controller
 public class WebController {
+
+    /**
+     * The home page.
+     *
+     * @return the template of the home page.
+     */
     @RequestMapping(value = "/")
     public String defaultPage() {
         return "index";
     }
 
+    /**
+     * The home page.
+     *
+     * @return the template of the home page.
+     */
     @RequestMapping(value = "/index")
     public String homePage() {
         return "index";
     }
 
     /**
-     * https://api.openbrewerydb.org/breweries?by_state=ohio&sort=type,+name
-     * https://api.openbrewerydb.org/breweries?by_city=san_diego&sort=-name
+     * Handles the request.
      *
-     * https://api.openbrewerydb.org/breweries/search?query=dog
-     *
-     * wyciągnięcie średniej, znalezienie ekstremów, porównanie wartości z różnych serwisów itp.
-     *
-     * https://www.boredapi.com/
-     * https://www.boredapi.com/api/activity?type=recreational
-     *
-     * @param model
-     * @param principal
-     * @return
+     * @param city  the city
+     * @param type  the type
+     * @param state  the state
+     * @param name  the name
+     * @param activityType  the activity type
+     * @param model  the model
+     * @return the template of the request result page
      */
-    @RequestMapping(value = "/result", method = RequestMethod.POST)
+    @RequestMapping(value = "/request", method = RequestMethod.POST)
     public String resultPage(@RequestParam(value = "city") String city,
                              @RequestParam(value = "type") String type,
                              @RequestParam(value = "state") String state,
                              @RequestParam(value = "name") String name,
                              @RequestParam(value = "activity") String activityType,
-                             Model model,
-                             Principal principal) {
+                             Model model) {
 
         Brewery[] breweries = requestBreweries(city, type, state, name);
         Activity activity = requestActivity(activityType);
 
         model.addAttribute("breweries", breweries);
         model.addAttribute("activity", activity);
-        model.addAttribute("word", "beer".toUpperCase());
+        model.addAttribute("words", new Stats().findTop3Words(breweries));
 
         return "result";
     }
 
+    /**
+     * Creates the request URI for the brewery request.
+     *
+     * @param city  the city
+     * @param type  the type
+     * @param state  the state
+     * @param name  the name
+     * @return the request URI
+     */
     private String createRequestUri(String city, String type, String state, String name){
         StringBuilder uriBuilder = new StringBuilder("https://api.openbrewerydb.org/breweries?");
 
@@ -87,12 +102,27 @@ public class WebController {
         return uriBuilder.toString();
     }
 
+    /**
+     * Makes a request to Open Brewery DB (https://www.openbrewerydb.org).
+     *
+     * @param city  the city
+     * @param type  the type
+     * @param state  the state
+     * @param name  the name
+     * @return the array of returned breweries
+     */
     private Brewery[] requestBreweries(String city, String type, String state, String name){
         String uri = createRequestUri(city, type, state, name);
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(uri, Brewery[].class);
     }
 
+    /**
+     * Makes a request to the Bored API (https://www.boredapi.com).
+     *
+     * @param activityType  the activity type
+     * @return the returned activity
+     */
     private Activity requestActivity(String activityType){
         RestTemplate restTemplate = new RestTemplate();
 
