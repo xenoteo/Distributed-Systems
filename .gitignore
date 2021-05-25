@@ -2,7 +2,7 @@
 /Sockets-TCP-UDP/Sockets-TCP-UDP.iml
 /Sockets-TCP-UDP/out
 /RabbitMQ/.idea
-/RabbitMQ/RabbitMQ.iml
+/RabbitMQ/out
 /Akka/.idea
 /Akka/Akka.iml
 /Zookeeper/.idea
