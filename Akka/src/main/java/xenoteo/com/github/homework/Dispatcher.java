@@ -8,7 +8,12 @@ import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * The wrapper class for the dispatcher actor.
@@ -69,23 +74,21 @@ public class Dispatcher {
          * @return the dispatcher actor
          */
         private Behavior<IQuery> onQuery(Query query) {
-            int notOverdueCount = 0;
-
             Map<Integer, SatelliteAPI.Status> errorSatelliteMap = new HashMap<>();
+            List<SatelliteRunnable> satelliteRunnables = new LinkedList<>();
             for (int id = query.firstSatelliteId; id < query.firstSatelliteId + query.range; id++){
-                long startTime = System.currentTimeMillis();
-                SatelliteAPI.Status status = SatelliteAPI.getStatus(id);
-                long endTime = System.currentTimeMillis();
-
-                if ((endTime - startTime) <= query.timeout){
-                    notOverdueCount++;
-                    if (status != SatelliteAPI.Status.OK){
-                        errorSatelliteMap.put(id, status);
-                        DBConnector.incrementErrors(id);
-                    }
-                }
+                satelliteRunnables.add(new SatelliteRunnable(id, errorSatelliteMap, query.timeout));
             }
 
+            // executing all the satellite requests in concurrently
+            ExecutorService executor = Executors.newCachedThreadPool();
+            CompletableFuture<?>[] futures = satelliteRunnables.stream()
+                    .map(task -> CompletableFuture.runAsync(task, executor))
+                    .toArray(CompletableFuture[]::new);
+            CompletableFuture.allOf(futures).join();
+            executor.shutdown();
+
+            int notOverdueCount = (int) satelliteRunnables.stream().filter(satellite -> !satellite.isOverdue).count();
             double notOverdueResponsePercent = 1.0 * notOverdueCount / query.range;
 
             query.stationSystem.tell(new Station.StationActor.Response(
@@ -185,6 +188,57 @@ public class Dispatcher {
             public ErrorQuery(int satelliteId, ActorSystem<Station.StationActor.IResponse> stationSystem) {
                 this.satelliteId = satelliteId;
                 this.stationSystem = stationSystem;
+            }
+        }
+    }
+
+
+    /**
+     * The runnable responsible for making a single satellite request to Satellite API.
+     */
+    private static class SatelliteRunnable implements Runnable {
+
+        /**
+         * The satellite ID.
+         */
+        private final int satelliteId;
+
+        /**
+         * The error satellite map to update in case of an error.
+         */
+        private final Map<Integer, SatelliteAPI.Status> errorSatelliteMap;
+
+        /**
+         * The allowed timeout.
+         */
+        private final int timeout;
+
+        /**
+         * Whether the request is overdue.
+         */
+        private boolean isOverdue;
+
+        public SatelliteRunnable(int satelliteId, Map<Integer, SatelliteAPI.Status> errorSatelliteMap, int timeout) {
+            this.satelliteId = satelliteId;
+            this.errorSatelliteMap = errorSatelliteMap;
+            this.timeout = timeout;
+            this.isOverdue = false;
+        }
+
+        @Override
+        public void run() {
+            long startTime = System.currentTimeMillis();
+            SatelliteAPI.Status status = SatelliteAPI.getStatus(satelliteId);
+            long endTime = System.currentTimeMillis();
+
+            if ((endTime - startTime) <= timeout){
+                if (status != SatelliteAPI.Status.OK){
+                    errorSatelliteMap.put(satelliteId, status);
+                    DBConnector.incrementErrors(satelliteId);
+                }
+            }
+            else {
+                isOverdue = true;
             }
         }
     }
