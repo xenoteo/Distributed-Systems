@@ -4,11 +4,6 @@ import io.grpc.stub.StreamObserver;
 import xenoteo.com.github.gen.MunicipalOfficeGrpc;
 import xenoteo.com.github.gen.MunicipalOfficeOuterClass;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 public class MunicipalOffice extends MunicipalOfficeGrpc.MunicipalOfficeImplBase {
 
     @Override
@@ -38,14 +33,18 @@ public class MunicipalOffice extends MunicipalOfficeGrpc.MunicipalOfficeImplBase
     }
 
     private String handleIssue(MunicipalOfficeOuterClass.IssueType issueType, String issueOwner, int issueOwnerId) {
+        DBConnector db = new DBConnector();
+
         System.out.printf("preparing %s for %s...\n", issueString(issueType), issueOwner);
-        setClientWaiting(issueOwnerId);
+        db.setClientWaiting(issueOwnerId);
 
         waitForIssue(getIssueTime(issueType));
 
         String answer = String.format("%s for %s is handled.\n", issueString(issueType), issueOwner);
-        updateClientLastResponse(issueOwnerId, answer);
+        db.updateClientLastResponse(issueOwnerId, answer);
         System.out.printf("%s for %s is handled\n", issueString(issueType), issueOwner);
+
+        db.disconnect();
         return answer;
     }
 
@@ -63,42 +62,6 @@ public class MunicipalOffice extends MunicipalOfficeGrpc.MunicipalOfficeImplBase
             case ISSUE_TYPE_CITIZENSHIP: return 12;
             case ISSUE_TYPE_RESIDENCE: return 4;
             default: return 0;
-        }
-    }
-
-    private void setClientWaiting(int clientId) {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:mo.db");
-
-            String sql = "update clients set waiting = 1 where id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, clientId);
-            preparedStatement.executeUpdate();
-
-            connection.close();
-        } catch(SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            System.err.println("Unable to connect to database");
-        }
-    }
-
-    private void updateClientLastResponse(int clientId, String response) {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            Connection connection = DriverManager.getConnection("jdbc:sqlite:mo.db");
-
-            String sql = "update clients set waiting = ?, response = ? where id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, 0);
-            preparedStatement.setString(2, response);
-            preparedStatement.setInt(3, clientId);
-            preparedStatement.executeUpdate();
-
-            connection.close();
-        } catch(SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-            System.err.println("Unable to connect to database");
         }
     }
 
