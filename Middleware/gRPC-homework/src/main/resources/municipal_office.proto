@@ -12,6 +12,7 @@ enum IssueType {
 message IssueArguments {
     IssueType type = 1;
     string name = 2;
+    int32 id = 3;
 }
 
 message IssueAnswer {

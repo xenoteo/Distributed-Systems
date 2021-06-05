@@ -155,10 +155,10 @@ public final class MunicipalOfficeOuterClass {
         getNameBytes();
 
     /**
-     * <code>int64 time = 3;</code>
-     * @return The time.
+     * <code>int32 id = 3;</code>
+     * @return The id.
      */
-    long getTime();
+    int getId();
   }
   /**
    * Protobuf type {@code IssueArguments}
@@ -221,7 +221,7 @@ public final class MunicipalOfficeOuterClass {
             }
             case 24: {
 
-              time_ = input.readInt64();
+              id_ = input.readInt32();
               break;
             }
             default: {
@@ -311,14 +311,14 @@ public final class MunicipalOfficeOuterClass {
       }
     }
 
-    public static final int TIME_FIELD_NUMBER = 3;
-    private long time_;
+    public static final int ID_FIELD_NUMBER = 3;
+    private int id_;
     /**
-     * <code>int64 time = 3;</code>
-     * @return The time.
+     * <code>int32 id = 3;</code>
+     * @return The id.
      */
-    public long getTime() {
-      return time_;
+    public int getId() {
+      return id_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -341,8 +341,8 @@ public final class MunicipalOfficeOuterClass {
       if (!getNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
       }
-      if (time_ != 0L) {
-        output.writeInt64(3, time_);
+      if (id_ != 0) {
+        output.writeInt32(3, id_);
       }
       unknownFields.writeTo(output);
     }
@@ -360,9 +360,9 @@ public final class MunicipalOfficeOuterClass {
       if (!getNameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
       }
-      if (time_ != 0L) {
+      if (id_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, time_);
+          .computeInt32Size(3, id_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -382,8 +382,8 @@ public final class MunicipalOfficeOuterClass {
       if (type_ != other.type_) return false;
       if (!getName()
           .equals(other.getName())) return false;
-      if (getTime()
-          != other.getTime()) return false;
+      if (getId()
+          != other.getId()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -399,9 +399,8 @@ public final class MunicipalOfficeOuterClass {
       hash = (53 * hash) + type_;
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
-      hash = (37 * hash) + TIME_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getTime());
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -539,7 +538,7 @@ public final class MunicipalOfficeOuterClass {
 
         name_ = "";
 
-        time_ = 0L;
+        id_ = 0;
 
         return this;
       }
@@ -569,7 +568,7 @@ public final class MunicipalOfficeOuterClass {
         xenoteo.com.github.gen.MunicipalOfficeOuterClass.IssueArguments result = new xenoteo.com.github.gen.MunicipalOfficeOuterClass.IssueArguments(this);
         result.type_ = type_;
         result.name_ = name_;
-        result.time_ = time_;
+        result.id_ = id_;
         onBuilt();
         return result;
       }
@@ -625,8 +624,8 @@ public final class MunicipalOfficeOuterClass {
           name_ = other.name_;
           onChanged();
         }
-        if (other.getTime() != 0L) {
-          setTime(other.getTime());
+        if (other.getId() != 0) {
+          setId(other.getId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -785,32 +784,32 @@ public final class MunicipalOfficeOuterClass {
         return this;
       }
 
-      private long time_ ;
+      private int id_ ;
       /**
-       * <code>int64 time = 3;</code>
-       * @return The time.
+       * <code>int32 id = 3;</code>
+       * @return The id.
        */
-      public long getTime() {
-        return time_;
+      public int getId() {
+        return id_;
       }
       /**
-       * <code>int64 time = 3;</code>
-       * @param value The time to set.
+       * <code>int32 id = 3;</code>
+       * @param value The id to set.
        * @return This builder for chaining.
        */
-      public Builder setTime(long value) {
+      public Builder setId(int value) {
         
-        time_ = value;
+        id_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>int64 time = 3;</code>
+       * <code>int32 id = 3;</code>
        * @return This builder for chaining.
        */
-      public Builder clearTime() {
+      public Builder clearId() {
         
-        time_ = 0L;
+        id_ = 0;
         onChanged();
         return this;
       }
@@ -1452,14 +1451,14 @@ public final class MunicipalOfficeOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\026municipal_office.proto\"F\n\016IssueArgumen" +
+      "\n\026municipal_office.proto\"D\n\016IssueArgumen" +
       "ts\022\030\n\004type\030\001 \001(\0162\n.IssueType\022\014\n\004name\030\002 \001" +
-      "(\t\022\014\n\004time\030\003 \001(\003\"\035\n\013IssueAnswer\022\016\n\006answe" +
-      "r\030\001 \001(\t*Z\n\tIssueType\022\027\n\023ISSUE_TYPE_PASSP" +
-      "ORT\020\000\022\032\n\026ISSUE_TYPE_CITIZENSHIP\020\001\022\030\n\024ISS" +
-      "UE_TYPE_RESIDENCE\020\0022>\n\017MunicipalOffice\022+" +
-      "\n\nCommission\022\017.IssueArguments\032\014.IssueAns" +
-      "werB\033\n\026xenoteo.com.github.gen\220\001\001b\006proto3"
+      "(\t\022\n\n\002id\030\003 \001(\005\"\035\n\013IssueAnswer\022\016\n\006answer\030" +
+      "\001 \001(\t*Z\n\tIssueType\022\027\n\023ISSUE_TYPE_PASSPOR" +
+      "T\020\000\022\032\n\026ISSUE_TYPE_CITIZENSHIP\020\001\022\030\n\024ISSUE" +
+      "_TYPE_RESIDENCE\020\0022>\n\017MunicipalOffice\022+\n\n" +
+      "Commission\022\017.IssueArguments\032\014.IssueAnswe" +
+      "rB\033\n\026xenoteo.com.github.gen\220\001\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1470,7 +1469,7 @@ public final class MunicipalOfficeOuterClass {
     internal_static_IssueArguments_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_IssueArguments_descriptor,
-        new java.lang.String[] { "Type", "Name", "Time", });
+        new java.lang.String[] { "Type", "Name", "Id", });
     internal_static_IssueAnswer_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_IssueAnswer_fieldAccessorTable = new

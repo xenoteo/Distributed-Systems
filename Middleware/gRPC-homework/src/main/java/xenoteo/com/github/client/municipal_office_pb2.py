@@ -22,7 +22,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\026xenoteo.com.github.gen\220\001\001',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x16municipal_office.proto\"8\n\x0eIssueArguments\x12\x18\n\x04type\x18\x01 \x01(\x0e\x32\n.IssueType\x12\x0c\n\x04name\x18\x02 \x01(\t\"\x1d\n\x0bIssueAnswer\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\t*Z\n\tIssueType\x12\x17\n\x13ISSUE_TYPE_PASSPORT\x10\x00\x12\x1a\n\x16ISSUE_TYPE_CITIZENSHIP\x10\x01\x12\x18\n\x14ISSUE_TYPE_RESIDENCE\x10\x02\x32>\n\x0fMunicipalOffice\x12+\n\nCommission\x12\x0f.IssueArguments\x1a\x0c.IssueAnswerB\x1b\n\x16xenoteo.com.github.gen\x90\x01\x01\x62\x06proto3'
+  serialized_pb=b'\n\x16municipal_office.proto\"D\n\x0eIssueArguments\x12\x18\n\x04type\x18\x01 \x01(\x0e\x32\n.IssueType\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\n\n\x02id\x18\x03 \x01(\x05\"\x1d\n\x0bIssueAnswer\x12\x0e\n\x06\x61nswer\x18\x01 \x01(\t*Z\n\tIssueType\x12\x17\n\x13ISSUE_TYPE_PASSPORT\x10\x00\x12\x1a\n\x16ISSUE_TYPE_CITIZENSHIP\x10\x01\x12\x18\n\x14ISSUE_TYPE_RESIDENCE\x10\x02\x32>\n\x0fMunicipalOffice\x12+\n\nCommission\x12\x0f.IssueArguments\x1a\x0c.IssueAnswerB\x1b\n\x16xenoteo.com.github.gen\x90\x01\x01\x62\x06proto3'
 )
 
 _ISSUETYPE = _descriptor.EnumDescriptor(
@@ -50,8 +50,8 @@ _ISSUETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=115,
-  serialized_end=205,
+  serialized_start=127,
+  serialized_end=217,
 )
 _sym_db.RegisterEnumDescriptor(_ISSUETYPE)
 
@@ -84,6 +84,13 @@ _ISSUEARGUMENTS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='id', full_name='IssueArguments.id', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -97,7 +104,7 @@ _ISSUEARGUMENTS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=26,
-  serialized_end=82,
+  serialized_end=94,
 )
 
 
@@ -128,8 +135,8 @@ _ISSUEANSWER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=84,
-  serialized_end=113,
+  serialized_start=96,
+  serialized_end=125,
 )
 
 _ISSUEARGUMENTS.fields_by_name['type'].enum_type = _ISSUETYPE
@@ -162,8 +169,8 @@ _MUNICIPALOFFICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=207,
-  serialized_end=269,
+  serialized_start=219,
+  serialized_end=281,
   methods=[
   _descriptor.MethodDescriptor(
     name='Commission',
