@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_package = "xenoteo.com.github.gen";
+option py_generic_services = true;
+
+enum IssueType {
+    ISSUE_TYPE_PASSPORT = 0;
+    ISSUE_TYPE_CITIZENSHIP = 1;
+    ISSUE_TYPE_RESIDENCE = 2;
+}
+
+message IssueArguments {
+    IssueType type = 1;
+    string name = 2;
+}
+
+message IssueAnswer {
+    string answer = 1;
+}
+
+service MunicipalOffice {
+    rpc Commission(IssueArguments) returns (IssueAnswer);
+}
