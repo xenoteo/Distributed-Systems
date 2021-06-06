@@ -8,11 +8,10 @@ import java.util.Map;
 import java.util.Set;
 
 public class TransferHandler implements Transfer.Iface {
+
     @Override
     public long transferList(List<Integer> data) throws TException {
-        // TODO check for null
         System.out.printf("Received a list of %d elements\n", data.size());
-
         return System.currentTimeMillis();
     }
 
