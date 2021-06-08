@@ -33,18 +33,13 @@ public class MunicipalOffice extends MunicipalOfficeGrpc.MunicipalOfficeImplBase
     }
 
     private String handleIssue(MunicipalOfficeOuterClass.IssueType issueType, String issueOwner, int issueOwnerId) {
-        DBConnector db = new DBConnector();
-
         System.out.printf("preparing %s for %s...\n", issueString(issueType), issueOwner);
-        db.setClientWaiting(issueOwnerId);
 
         waitForIssue(getIssueTime(issueType));
 
         String answer = String.format("%s for %s is handled.\n", issueString(issueType), issueOwner);
-        db.updateClientLastResponse(issueOwnerId, answer);
         System.out.printf("%s for %s is handled\n", issueString(issueType), issueOwner);
 
-        db.disconnect();
         return answer;
     }
 
