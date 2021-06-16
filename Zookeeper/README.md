@@ -17,8 +17,10 @@ provided as a program argument.
 ## Execution
 *Note: the following configuration is provided for the Linux OS.*
 
-Run the main program with two arguments: `<host port> <the command to execute>`  
-Example argument list: `127.0.0.1:2181 kate`
+Run the [main program](src/xenoteo/com/github/Executor.java) 
+with two arguments: `<host port> <the command to execute>`  
+Example argument list: `127.0.0.1:2181 kate`   
+If you use IntelliJ and there are dependencies that are not seen go to `File` -> `Invalidate Caches / Restart...`.
 
 To run Zookeeper servers and clients go to `apache-zookeeper-3.6.1-bin/bin` folder. 
 Run three servers using three configuration files `zoo1.cfg`, `zoo3.cfg` and `zoo3.cfg`, 

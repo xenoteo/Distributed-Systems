@@ -161,47 +161,193 @@ org.apache.zookeeper.server.admin.AdminServer$AdminServerException: Problem star
 2021-06-14 12:35:34,684 [myid:3] - INFO  [CommitProcessor:3:LearnerSessionTracker@116] - Committing global session 0x100005f2d840002
 2021-06-14 12:36:49,529 [myid:3] - INFO  [CommitProcessor:3:LearnerSessionTracker@116] - Committing global session 0x100005f2d840003
 2021-06-14 12:37:12,467 [myid:3] - INFO  [CommitProcessor:3:LearnerSessionTracker@116] - Committing global session 0x100005f2d840004
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                2021-06-14 12:32:12,321 [myid:2] - INFO  [ListenerHandler-localhost/127.0.0.1:3889:QuorumCnxManager$Listener$ListenerHandler@1070] - Received connection request from /127.0.0.1:51246
-2021-06-14 12:32:12,325 [myid:2] - INFO  [WorkerReceiver[myid=2]:FastLeaderElection$Messenger$WorkerReceiver@389] - Notification: my state:LEADING; n.sid:3, n.state:LOOKING, n.leader:3, n.round:0x1, n.peerEpoch:0x5, n.zxid:0x500000010, message format version:0x2, n.config version:0x0
-2021-06-14 12:32:12,344 [myid:2] - INFO  [LearnerHandler-/127.0.0.1:53330:LearnerHandler@504] - Follower sid: 3 : info : localhost:2890:3890:participant
-2021-06-14 12:32:12,396 [myid:2] - INFO  [LearnerHandler-/127.0.0.1:53330:ZKDatabase@345] - On disk txn sync enabled with snapshotSizeFactor 0.33
-2021-06-14 12:32:12,396 [myid:2] - INFO  [LearnerHandler-/127.0.0.1:53330:LearnerHandler@800] - Synchronizing with Learner sid: 3 maxCommittedLog=0x500000010 minCommittedLog=0x500000001 lastProcessedZxid=0x600000000 peerLastZxid=0x500000010
-2021-06-14 12:32:12,396 [myid:2] - INFO  [LearnerHandler-/127.0.0.1:53330:LearnerHandler@864] - Using committedLog for peer sid: 3
-2021-06-14 12:32:12,397 [myid:2] - INFO  [LearnerHandler-/127.0.0.1:53330:LearnerHandler@972] - Sending DIFF zxid=0x500000010  for peer sid: 3
-2021-06-14 12:33:29,157 [myid:2] - INFO  [SyncThread:2:FileTxnLog@284] - Creating new log file: log.600000001
-2021-06-14 12:33:29,273 [myid:2] - INFO  [CommitProcessor:2:LeaderSessionTracker@104] - Committing global session 0x100005f2d840000
-2021-06-14 12:34:01,018 [myid:2] - INFO  [SessionTracker:ZooKeeperServer@600] - Expiring session 0x100005f2d840000, timeout of 30000ms exceeded
-2021-06-14 12:34:01,020 [myid:2] - INFO  [RequestThrottler:QuorumZooKeeperServer@158] - Submitting global closeSession request for session 0x100005f2d840000
-2021-06-14 12:35:04,447 [myid:2] - INFO  [CommitProcessor:2:LeaderSessionTracker@104] - Committing global session 0x100005f2d840001
-2021-06-14 12:35:34,682 [myid:2] - INFO  [CommitProcessor:2:LeaderSessionTracker@104] - Committing global session 0x100005f2d840002
-2021-06-14 12:36:49,528 [myid:2] - INFO  [CommitProcessor:2:LeaderSessionTracker@104] - Committing global session 0x100005f2d840003
-2021-06-14 12:37:12,466 [myid:2] - INFO  [CommitProcessor:2:LeaderSessionTracker@104] - Committing global session 0x100005f2d840004
-2021-06-14 13:37:51,019 [myid:2] - INFO  [SessionTracker:ZooKeeperServer@600] - Expiring session 0x100005f2d840004, timeout of 10000ms exceeded
-2021-06-14 13:37:51,019 [myid:2] - INFO  [RequestThrottler:QuorumZooKeeperServer@158] - Submitting global closeSession request for session 0x100005f2d840004
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        2021-06-14 12:32:12,321 [myid:1] - INFO  [ListenerHandler-localhost/127.0.0.1:3888:QuorumCnxManager$Listener$ListenerHandler@1070] - Received connection request from /127.0.0.1:49732
-2021-06-14 12:32:12,326 [myid:1] - INFO  [WorkerReceiver[myid=1]:FastLeaderElection$Messenger$WorkerReceiver@389] - Notification: my state:FOLLOWING; n.sid:3, n.state:LOOKING, n.leader:3, n.round:0x1, n.peerEpoch:0x5, n.zxid:0x500000010, message format version:0x2, n.config version:0x0
-2021-06-14 12:33:29,159 [myid:1] - WARN  [QuorumPeer[myid=1](plain=[0:0:0:0:0:0:0:0]:2181)(secure=disabled):Follower@170] - Got zxid 0x600000001 expected 0x1
-2021-06-14 12:33:29,162 [myid:1] - INFO  [SyncThread:1:FileTxnLog@284] - Creating new log file: log.600000001
-2021-06-14 12:33:29,275 [myid:1] - INFO  [CommitProcessor:1:LearnerSessionTracker@116] - Committing global session 0x100005f2d840000
-2021-06-14 12:33:34,155 [myid:1] - WARN  [NIOWorkerThread-3:NIOServerCnxn@364] - Unexpected exception
-EndOfStreamException: Unable to read additional data from client, it probably closed the socket: address = /127.0.0.1:40128, session = 0x100005f2d840000
-	at org.apache.zookeeper.server.NIOServerCnxn.handleFailedRead(NIOServerCnxn.java:163)
-	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:326)
-	at org.apache.zookeeper.server.NIOServerCnxnFactory$IOWorkRequest.doWork(NIOServerCnxnFactory.java:522)
-	at org.apache.zookeeper.server.WorkerService$ScheduledWorkRequest.run(WorkerService.java:154)
+2021-06-14 13:40:22,909 [myid:3] - WARN  [RecvWorker:1:QuorumCnxManager$RecvWorker@1395] - Connection broken for id 1, my id = 3
+java.io.EOFException
+	at java.io.DataInputStream.readInt(DataInputStream.java:392)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$RecvWorker.run(QuorumCnxManager.java:1383)
+2021-06-14 13:40:22,911 [myid:3] - WARN  [RecvWorker:1:QuorumCnxManager$RecvWorker@1401] - Interrupting SendWorker thread from RecvWorker. sid: 1. myId: 3
+2021-06-14 13:40:22,916 [myid:3] - WARN  [SendWorker:1:QuorumCnxManager$SendWorker@1281] - Interrupted while waiting for message on queue
+java.lang.InterruptedException
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.reportInterruptAfterWait(AbstractQueuedSynchronizer.java:2014)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2088)
+	at org.apache.zookeeper.util.CircularBlockingQueue.poll(CircularBlockingQueue.java:105)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.pollSendQueue(QuorumCnxManager.java:1446)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.access$900(QuorumCnxManager.java:98)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$SendWorker.run(QuorumCnxManager.java:1270)
+2021-06-14 13:40:22,917 [myid:3] - WARN  [SendWorker:1:QuorumCnxManager$SendWorker@1293] - Send worker leaving thread id 1 my id = 3
+2021-06-14 13:40:27,735 [myid:3] - WARN  [RecvWorker:2:QuorumCnxManager$RecvWorker@1395] - Connection broken for id 2, my id = 3
+java.io.EOFException
+	at java.io.DataInputStream.readInt(DataInputStream.java:392)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$RecvWorker.run(QuorumCnxManager.java:1383)
+2021-06-14 13:40:27,735 [myid:3] - WARN  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):Follower@129] - Exception when following the leader
+java.io.EOFException
+	at java.io.DataInputStream.readInt(DataInputStream.java:392)
+	at org.apache.jute.BinaryInputArchive.readInt(BinaryInputArchive.java:96)
+	at org.apache.zookeeper.server.quorum.QuorumPacket.deserialize(QuorumPacket.java:86)
+	at org.apache.jute.BinaryInputArchive.readRecord(BinaryInputArchive.java:134)
+	at org.apache.zookeeper.server.quorum.Learner.readPacket(Learner.java:182)
+	at org.apache.zookeeper.server.quorum.Follower.followLeader(Follower.java:125)
+	at org.apache.zookeeper.server.quorum.QuorumPeer.run(QuorumPeer.java:1455)
+2021-06-14 13:40:27,736 [myid:3] - WARN  [RecvWorker:2:QuorumCnxManager$RecvWorker@1401] - Interrupting SendWorker thread from RecvWorker. sid: 2. myId: 3
+2021-06-14 13:40:27,739 [myid:3] - WARN  [SendWorker:2:QuorumCnxManager$SendWorker@1281] - Interrupted while waiting for message on queue
+java.lang.InterruptedException
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.reportInterruptAfterWait(AbstractQueuedSynchronizer.java:2014)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2088)
+	at org.apache.zookeeper.util.CircularBlockingQueue.poll(CircularBlockingQueue.java:105)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.pollSendQueue(QuorumCnxManager.java:1446)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.access$900(QuorumCnxManager.java:98)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$SendWorker.run(QuorumCnxManager.java:1270)
+2021-06-14 13:40:27,740 [myid:3] - WARN  [SendWorker:2:QuorumCnxManager$SendWorker@1293] - Send worker leaving thread id 2 my id = 3
+2021-06-14 13:40:27,741 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):Follower@143] - Disconnected from leader (with address: localhost/127.0.0.1:2889). Was connected for 4095396ms. Sync state: true
+2021-06-14 13:40:27,742 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):Follower@292] - shutdown Follower
+2021-06-14 13:40:27,743 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):LearnerZooKeeperServer@160] - Shutting down
+2021-06-14 13:40:27,744 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):ZooKeeperServer@784] - shutting down
+2021-06-14 13:40:27,744 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):RequestThrottler@244] - Shutting down
+2021-06-14 13:40:27,745 [myid:3] - INFO  [RequestThrottler:RequestThrottler@205] - Draining request throttler queue
+2021-06-14 13:40:27,746 [myid:3] - INFO  [RequestThrottler:RequestThrottler@181] - RequestThrottler shutdown. Dropped 0 requests
+2021-06-14 13:40:27,746 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):FollowerRequestProcessor@148] - Shutting down
+2021-06-14 13:40:27,747 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):CommitProcessor@617] - Shutting down
+2021-06-14 13:40:27,747 [myid:3] - INFO  [FollowerRequestProcessor:3:FollowerRequestProcessor@112] - FollowerRequestProcessor exited loop!
+2021-06-14 13:40:27,748 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):FinalRequestProcessor@662] - shutdown of request processor complete
+2021-06-14 13:40:27,748 [myid:3] - INFO  [CommitProcessor:3:CommitProcessor@406] - CommitProcessor exited loop!
+2021-06-14 13:40:27,753 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):SyncRequestProcessor@256] - Shutting down
+2021-06-14 13:40:27,754 [myid:3] - INFO  [SyncThread:3:SyncRequestProcessor@225] - SyncRequestProcessor exited!
+2021-06-14 13:40:27,755 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):QuorumPeer@863] - Peer state changed: looking
+2021-06-14 13:40:27,756 [myid:3] - WARN  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):QuorumPeer@1501] - PeerState set to LOOKING
+2021-06-14 13:40:27,756 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):QuorumPeer@1371] - LOOKING
+2021-06-14 13:40:27,758 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):FastLeaderElection@944] - New election. My id = 3, proposed zxid=0x60000000e
+2021-06-14 13:40:27,764 [myid:3] - WARN  [QuorumConnectionThread-[myid=3]-3:QuorumCnxManager@400] - Cannot open channel to 1 at election address localhost/127.0.0.1:3888
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.initiateConnection(QuorumCnxManager.java:383)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$QuorumConnectionReqThread.run(QuorumCnxManager.java:457)
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
-2021-06-14 12:35:04,447 [myid:1] - INFO  [CommitProcessor:1:LearnerSessionTracker@116] - Committing global session 0x100005f2d840001
-2021-06-14 12:35:34,682 [myid:1] - INFO  [CommitProcessor:1:LearnerSessionTracker@116] - Committing global session 0x100005f2d840002
-2021-06-14 12:36:49,528 [myid:1] - INFO  [CommitProcessor:1:LearnerSessionTracker@116] - Committing global session 0x100005f2d840003
-2021-06-14 12:37:12,466 [myid:1] - INFO  [CommitProcessor:1:LearnerSessionTracker@116] - Committing global session 0x100005f2d840004
-2021-06-14 13:37:40,375 [myid:1] - WARN  [NIOWorkerThread-5:NIOServerCnxn@364] - Unexpected exception
-EndOfStreamException: Unable to read additional data from client, it probably closed the socket: address = /127.0.0.1:40156, session = 0x100005f2d840004
-	at org.apache.zookeeper.server.NIOServerCnxn.handleFailedRead(NIOServerCnxn.java:163)
-	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:326)
-	at org.apache.zookeeper.server.NIOServerCnxnFactory$IOWorkRequest.doWork(NIOServerCnxnFactory.java:522)
-	at org.apache.zookeeper.server.WorkerService$ScheduledWorkRequest.run(WorkerService.java:154)
+2021-06-14 13:40:27,767 [myid:3] - WARN  [QuorumConnectionThread-[myid=3]-4:QuorumCnxManager@400] - Cannot open channel to 2 at election address localhost/127.0.0.1:3889
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.initiateConnection(QuorumCnxManager.java:383)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$QuorumConnectionReqThread.run(QuorumCnxManager.java:457)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2021-06-14 13:40:27,767 [myid:3] - INFO  [WorkerReceiver[myid=3]:FastLeaderElection$Messenger$WorkerReceiver@389] - Notification: my state:LOOKING; n.sid:3, n.state:LOOKING, n.leader:3, n.round:0x2, n.peerEpoch:0x6, n.zxid:0x60000000e, message format version:0x2, n.config version:0x0
+2021-06-14 13:40:27,972 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):FastLeaderElection@979] - Notification time out: 400
+2021-06-14 13:40:27,973 [myid:3] - WARN  [QuorumConnectionThread-[myid=3]-5:QuorumCnxManager@400] - Cannot open channel to 1 at election address localhost/127.0.0.1:3888
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.initiateConnection(QuorumCnxManager.java:383)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$QuorumConnectionReqThread.run(QuorumCnxManager.java:457)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2021-06-14 13:40:27,973 [myid:3] - WARN  [QuorumConnectionThread-[myid=3]-4:QuorumCnxManager@400] - Cannot open channel to 2 at election address localhost/127.0.0.1:3889
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.initiateConnection(QuorumCnxManager.java:383)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$QuorumConnectionReqThread.run(QuorumCnxManager.java:457)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2021-06-14 13:40:28,375 [myid:3] - WARN  [QuorumConnectionThread-[myid=3]-4:QuorumCnxManager@400] - Cannot open channel to 1 at election address localhost/127.0.0.1:3888
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.initiateConnection(QuorumCnxManager.java:383)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$QuorumConnectionReqThread.run(QuorumCnxManager.java:457)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2021-06-14 13:40:28,376 [myid:3] - WARN  [QuorumConnectionThread-[myid=3]-5:QuorumCnxManager@400] - Cannot open channel to 2 at election address localhost/127.0.0.1:3889
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.initiateConnection(QuorumCnxManager.java:383)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$QuorumConnectionReqThread.run(QuorumCnxManager.java:457)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2021-06-14 13:40:28,375 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):FastLeaderElection@979] - Notification time out: 800
+2021-06-14 13:40:29,180 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):FastLeaderElection@979] - Notification time out: 1600
+2021-06-14 13:40:29,181 [myid:3] - WARN  [QuorumConnectionThread-[myid=3]-5:QuorumCnxManager@400] - Cannot open channel to 1 at election address localhost/127.0.0.1:3888
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.initiateConnection(QuorumCnxManager.java:383)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$QuorumConnectionReqThread.run(QuorumCnxManager.java:457)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2021-06-14 13:40:29,181 [myid:3] - WARN  [QuorumConnectionThread-[myid=3]-4:QuorumCnxManager@400] - Cannot open channel to 2 at election address localhost/127.0.0.1:3889
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.initiateConnection(QuorumCnxManager.java:383)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$QuorumConnectionReqThread.run(QuorumCnxManager.java:457)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2021-06-14 13:40:30,783 [myid:3] - INFO  [QuorumPeer[myid=3](plain=[0:0:0:0:0:0:0:0]:2183)(secure=disabled):FastLeaderElection@979] - Notification time out: 3200
+2021-06-14 13:40:30,783 [myid:3] - WARN  [QuorumConnectionThread-[myid=3]-4:QuorumCnxManager@400] - Cannot open channel to 1 at election address localhost/127.0.0.1:3888
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.initiateConnection(QuorumCnxManager.java:383)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$QuorumConnectionReqThread.run(QuorumCnxManager.java:457)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2021-06-14 13:40:30,784 [myid:3] - WARN  [QuorumConnectionThread-[myid=3]-5:QuorumCnxManager@400] - Cannot open channel to 2 at election address localhost/127.0.0.1:3889
+java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:607)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager.initiateConnection(QuorumCnxManager.java:383)
+	at org.apache.zookeeper.server.quorum.QuorumCnxManager$QuorumConnectionReqThread.run(QuorumCnxManager.java:457)
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
