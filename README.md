@@ -15,3 +15,6 @@ More detailed mini-project descriptions can be found in readme files provided fo
 ## Comment
 You are free to use these solutions for your classes. You are also free to provide feedback or contribute 
 to this repo. To do this leave a comment in [Issues](https://github.com/xenoteo/Distributed-Systems/issues/1).
+
+## License
+This is an open source repo licensed as [MIT License](LICENSE.md).
