@@ -81,7 +81,7 @@ All dependencies are added via maven. After import of the project to IntelliJ,
 it should work normally. If not then go to `File` -> `Invalidate Caches / Restart...`.
 
 #### Maven
-You can also run the program using maven runngin the following command:  
+You can also run the program using maven running the following command:  
 `mvn compile exec:java`
 
 ## [Lab](src/main/java/xenoteo/com/github/lab)
