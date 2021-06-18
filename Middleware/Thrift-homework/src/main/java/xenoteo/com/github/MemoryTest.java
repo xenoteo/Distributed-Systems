@@ -1,16 +1,12 @@
-package xenoteo.com.github.server;
+package xenoteo.com.github;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TCompactProtocol;
-import org.apache.thrift.protocol.TJSONProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TMemoryBuffer;
 import xenoteo.com.github.client.DataGenerator;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class MemoryTest {
     public static void main(String[] args) {
