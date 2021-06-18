@@ -16,3 +16,8 @@ there are statistics about top 3 words in names of breweries provided.
 To run the application, run the following command in the project root folder:  
 `mvn spring-boot:run`  
 After that, the app is available at http://localhost:8080.
+
+## Technologies used
+- Java + Spring Boot
+- Thymeleaf + Bootstrap
+- Maven
