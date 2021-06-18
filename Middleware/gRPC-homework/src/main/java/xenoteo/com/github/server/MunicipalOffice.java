@@ -16,7 +16,7 @@ public class MunicipalOffice extends MunicipalOfficeGrpc.MunicipalOfficeImplBase
 
         MunicipalOfficeOuterClass.IssueType issueType = request.getType();
         String issueOwner = request.getName();
-        int issueOwnerId = request.getId();
+        int issueOwnerId = request.getClientId();
 
         if (issueType == MunicipalOfficeOuterClass.IssueType.UNRECOGNIZED){
             System.out.println("bad issue type provided.");
