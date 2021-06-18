@@ -59,6 +59,8 @@ Make sure all jars from the `lib` folder are attached to your project.
 To get access to the database console go to `View | Tool Windows | Database` ->
 add new `Data Source` -> `SQLite` and provide `File` path `src/main/java/xenoteo/com/github/client/mo.db`. 
 After that, you will be able to use database console.
+  
+If you use IntelliJ and there are dependencies that are not seen go to `File` -> `Invalidate Caches / Restart...`.  
 
 ## Code generation
 ### Java
