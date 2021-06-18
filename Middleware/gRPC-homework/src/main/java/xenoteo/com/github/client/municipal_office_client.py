@@ -33,6 +33,9 @@ def call_municipal_office(stub, name, client_id, issue_type, db):
 
 
 def run(db):
+    if not db.clients_table_exists():
+        db.create_clients_table()
+
     name = input("Enter a client name: ")
     client_id = int(input("Enter a client ID: "))
 
@@ -42,15 +45,15 @@ def run(db):
     channel = grpc.insecure_channel('localhost:50051')
     stub = municipal_office_pb2_grpc.MunicipalOfficeStub(channel)
 
-    if db.is_waiting(client_id):
-        print("handling the previous issue...")
-        issue = db.get_prev_issue(client_id)
-        if issue == 1:
-            call_municipal_office(stub, name, client_id, municipal_office_pb2.ISSUE_TYPE_PASSPORT, db)
-        elif issue == 2:
-            call_municipal_office(stub, name, client_id, municipal_office_pb2.ISSUE_TYPE_CITIZENSHIP, db)
-        elif issue == 3:
-            call_municipal_office(stub, name, client_id, municipal_office_pb2.ISSUE_TYPE_RESIDENCE, db)
+    # if db.is_waiting(client_id):
+    #     print("handling the previous issue...")
+    #     issue = db.get_prev_issue(client_id)
+    #     if issue == 1:
+    #         call_municipal_office(stub, name, client_id, municipal_office_pb2.ISSUE_TYPE_PASSPORT, db)
+    #     elif issue == 2:
+    #         call_municipal_office(stub, name, client_id, municipal_office_pb2.ISSUE_TYPE_CITIZENSHIP, db)
+    #     elif issue == 3:
+    #         call_municipal_office(stub, name, client_id, municipal_office_pb2.ISSUE_TYPE_RESIDENCE, db)
 
     choice = '0'
     while choice != 'q':

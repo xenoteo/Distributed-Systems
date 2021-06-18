@@ -42,3 +42,12 @@ class DBConnector:
         self.conn.execute("update clients set issue = ? where id = ?", (issue, client_id))
         self.conn.commit()
 
+    def clients_table_exists(self):
+        cursor = self.conn.execute("select name from sqlite_master where type='table' and name='clients'")
+        for row in cursor:
+            return row[0] is not None
+        return False
+
+    def create_clients_table(self):
+        self.conn.execute("create table clients (id integer, waiting bit, issue integer)")
+
