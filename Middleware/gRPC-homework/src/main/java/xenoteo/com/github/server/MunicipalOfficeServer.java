@@ -5,7 +5,11 @@ import io.grpc.ServerBuilder;
 
 import java.io.IOException;
 
+/**
+ * The municipal office server handling clients' requests.
+ */
 public class MunicipalOfficeServer {
+
     private Server server;
 
     public static void main(String[] args) {

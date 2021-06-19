@@ -7,10 +7,23 @@ from db_connector import DBConnector
 
 
 def time_now():
+    """
+    A function returning the current time.
+
+    :return: the current time.
+    """
+
     return datetime.now().strftime("%H:%M:%S")
 
 
 def issue_string(issue_type):
+    """
+    A function returning a string representing an issue type.
+
+    :param issue_type: the issue type
+    :return: the string representing the issue type
+    """
+
     if issue_type == municipal_office_pb2.ISSUE_TYPE_PASSPORT:
         return "passport issue"
     elif issue_type == municipal_office_pb2.ISSUE_TYPE_CITIZENSHIP:
@@ -22,6 +35,17 @@ def issue_string(issue_type):
 
 
 def call_municipal_office(stub, name, client_id, issue_type, db):
+    """
+    A function sending an issue request to the municipal office server.
+    If server is unavailable the request is not sent.
+
+    :param stub: the stub
+    :param name: the client name
+    :param client_id: the client ID
+    :param issue_type: the issue type
+    :param db: the database
+    """
+
     try:
         db.set_waiting(client_id, 1)
         print(f"[{time_now()}] sending a request for a {issue_string(issue_type)}...")
@@ -33,6 +57,8 @@ def call_municipal_office(stub, name, client_id, issue_type, db):
 
 
 def run(db):
+    """A function running municipal office client."""
+
     if not db.clients_table_exists():
         db.create_clients_table()
 
@@ -75,6 +101,11 @@ def run(db):
 
 
 if __name__ == '__main__':
+    """
+    A municipal office client sending issue request to the server.
+    The issue type is read from the console and the issue response is written to the console as well.
+    """
+
     connector = DBConnector()
     try:
         run(connector)

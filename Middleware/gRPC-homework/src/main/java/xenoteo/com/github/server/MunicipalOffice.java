@@ -4,6 +4,9 @@ import io.grpc.stub.StreamObserver;
 import xenoteo.com.github.gen.MunicipalOfficeGrpc;
 import xenoteo.com.github.gen.MunicipalOfficeOuterClass;
 
+/**
+ * The municipal office issue handler.
+ */
 public class MunicipalOffice extends MunicipalOfficeGrpc.MunicipalOfficeImplBase {
 
     @Override
@@ -32,6 +35,14 @@ public class MunicipalOffice extends MunicipalOfficeGrpc.MunicipalOfficeImplBase
         responseObserver.onCompleted();
     }
 
+    /**
+     * Handles an issue of the provided type.
+     *
+     * @param issueType  the issue type
+     * @param issueOwner  the issue owner name
+     * @param issueOwnerId  the issue owner ID
+     * @return the issue response
+     */
     private String handleIssue(MunicipalOfficeOuterClass.IssueType issueType, String issueOwner, int issueOwnerId) {
         System.out.printf("preparing %s for %s...\n", issueString(issueType), issueOwner);
 
@@ -43,6 +54,11 @@ public class MunicipalOffice extends MunicipalOfficeGrpc.MunicipalOfficeImplBase
         return answer;
     }
 
+    /**
+     * Waits the provided number of seconds for issue to be handled.
+     *
+     * @param issueTime the time to wait
+     */
     private void waitForIssue(int issueTime){
         try {
             Thread.sleep(issueTime * 1000L);
@@ -51,6 +67,12 @@ public class MunicipalOffice extends MunicipalOfficeGrpc.MunicipalOfficeImplBase
         }
     }
 
+    /**
+     * Gets the number of second to wait for the issue of the provided type to be handled.
+     *
+     * @param issueType  the issue type
+     * @return the time needed for handling the provided issue type
+     */
     private int getIssueTime(MunicipalOfficeOuterClass.IssueType issueType){
         switch (issueType) {
             case ISSUE_TYPE_PASSPORT: return 2;
@@ -60,6 +82,12 @@ public class MunicipalOffice extends MunicipalOfficeGrpc.MunicipalOfficeImplBase
         }
     }
 
+    /**
+     * Returns a string representing an issue type.
+     *
+     * @param issueType  the issue type
+     * @return the string representing the issue type.
+     */
     private String issueString(MunicipalOfficeOuterClass.IssueType issueType) {
         switch (issueType) {
             case ISSUE_TYPE_PASSPORT: return "passport issue";
