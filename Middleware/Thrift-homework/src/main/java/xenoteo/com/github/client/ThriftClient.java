@@ -1,10 +1,7 @@
 package xenoteo.com.github.client;
 
 import org.apache.thrift.TException;
-import org.apache.thrift.protocol.TBinaryProtocol;
-import org.apache.thrift.protocol.TCompactProtocol;
-import org.apache.thrift.protocol.TJSONProtocol;
-import org.apache.thrift.protocol.TProtocol;
+import org.apache.thrift.protocol.*;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import xenoteo.com.github.thrift.gen.Transfer;
@@ -14,14 +11,28 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * The simple Thrift client sending data of different size,
+ * stored in different datastructures, using different Thrift serialisation methods
+ * to the Thrift simple server.
+ */
 public class ThriftClient {
 
     public static void main(String[] args) {
         String host = "127.0.0.2";
         TTransport transport = new TSocket(host, 9080);
-        TProtocol protocol = new TBinaryProtocol(transport);
-//        TProtocol protocol = new TJSONProtocol(transport);
-//        TProtocol protocol = new TCompactProtocol(transport);
+
+        if (args.length < 1) {
+            printError();
+            System.exit(1);
+        }
+
+        TProtocol protocol = readProtocol(args[0], transport);
+        if (protocol == null) {
+            printError();
+            System.exit(1);
+        }
+
         Transfer.Client client = new Transfer.Client(protocol);
 
         try {
@@ -65,5 +76,30 @@ public class ThriftClient {
         } catch (TException ex) {
             ex.printStackTrace();
         }
+    }
+
+    /**
+     * Prints an error when bad arguments provided.
+     */
+    private static void printError() {
+        System.err.println("Bad arguments provided.");
+        System.err.println("The client needs a serialisation method to be provided as program argument: " +
+                "binary | json | compact");
+    }
+
+    /**
+     * Returns the TProtocol based on an argument provided.
+     *
+     * @param protocol  the string representing a protocol type
+     * @param transport  the transport
+     * @return the TProtocol of the required type
+     */
+    private static TProtocol readProtocol(String protocol, TTransport transport){
+        return switch (protocol) {
+            case "binary" -> new TBinaryProtocol(transport);
+            case "json" -> new TJSONProtocol(transport);
+            case "compact" -> new TCompactProtocol(transport);
+            default -> null;
+        };
     }
 }

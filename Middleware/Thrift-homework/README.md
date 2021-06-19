@@ -58,7 +58,10 @@ good for various uses.
 The main files are [ThriftClient.java](src/main/java/xenoteo/com/github/client/ThriftClient.java) & 
 [ThriftServer](src/main/java/xenoteo/com/github/server/ThriftServer.java) 
 and [thrift_client.py](src/main/py/thrift_client.py) & [thrift_server.py](src/main/py/thrift_server.py). Memory tests
-can be run using [MemoryTest.java](src/main/java/xenoteo/com/github/MemoryTest.java).
+can be run using [MemoryTest.java](src/main/java/xenoteo/com/github/MemoryTest.java) or 
+[memory_test.py](src/main/py/memory_test.py).  
+For all mentioned programs the serialisation method should be
+provided as an argument: `binary | json | compact`  
   
 If you use Intellij, right click on folder `gen-java` -> `Mark Directory as` -> `Generated Sources Root`.   
   

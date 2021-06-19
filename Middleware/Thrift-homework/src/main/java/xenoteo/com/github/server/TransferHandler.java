@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * A class responsible for handling data transfers.
+ */
 public class TransferHandler implements Transfer.Iface {
 
     @Override

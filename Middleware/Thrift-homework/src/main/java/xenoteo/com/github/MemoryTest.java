@@ -2,47 +2,71 @@ package xenoteo.com.github;
 
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
+import org.apache.thrift.protocol.TCompactProtocol;
+import org.apache.thrift.protocol.TJSONProtocol;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TMemoryBuffer;
 import xenoteo.com.github.client.DataGenerator;
 
 import java.util.List;
 
+/**
+ * A simple class running memory test, that is counting how many bytes are written to TMemoryBuffer
+ * using different serialisation methods while sending 1000000 elements.
+ */
 public class MemoryTest {
-    public static void main(String[] args) {
-        MemoryTest memoryTest = new MemoryTest();
-        memoryTest.test();
-    }
 
-    private void test(){
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            printError();
+            System.exit(1);
+        }
         try {
+            String protocolType = args[0];
+
             TMemoryBuffer trans = new TMemoryBuffer(4096);
 
-            TProtocol proto = new TBinaryProtocol(trans);
-//            TProtocol proto = new TJSONProtocol(trans);
-//            TProtocol proto = new TCompactProtocol(trans);
-
-            DataGenerator generator = new DataGenerator();
-
-            List<Integer> list = generator.generateList(1000000);
-            for (int x : list){
-                proto.writeI32(x);
+            TProtocol protocol = readProtocol(protocolType, trans);
+            if (protocol == null) {
+                printError();
+                System.exit(1);
             }
 
-//            Set<Integer> set = generator.generateSet(1000000);
-//            for (int x : set){
-//                proto.writeI32(x);
-//            }
+            DataGenerator generator = new DataGenerator();
+            List<Integer> list = generator.generateList(1000000);
+            for (int x : list){
+                protocol.writeI32(x);
+            }
 
-//            Map<Integer, Integer> map = generator.generateMap(1000000);
-//            for (Map.Entry<Integer, Integer> pair : map.entrySet()){
-//                proto.writeI32(pair.getKey());
-//                proto.writeI32(pair.getValue());
-//            }
-
-            System.out.println("Wrote " + trans.length() + " bytes to the TMemoryBuffer");
+            System.out.printf("Using %s protocol and sending 1000000 elements wrote %d bytes to the TMemoryBuffer\n",
+                    protocolType, trans.length());
         } catch (TException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Prints an error when bad arguments provided.
+     */
+    private static void printError() {
+        System.err.println("Bad arguments provided.");
+        System.err.println("The program needs a serialisation method to be provided as program argument: " +
+                "binary | json | compact");
+    }
+
+    /**
+     * Returns the TProtocol based on an argument provided.
+     *
+     * @param protocol  the string representing a protocol type
+     * @param trans  the memory buffer
+     * @return the TProtocol of the required type
+     */
+    private static TProtocol readProtocol(String protocol, TMemoryBuffer trans){
+        return switch (protocol) {
+            case "binary" -> new TBinaryProtocol(trans);
+            case "json" -> new TJSONProtocol(trans);
+            case "compact" -> new TCompactProtocol(trans);
+            default -> null;
+        };
     }
 }

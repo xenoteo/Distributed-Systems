@@ -12,6 +12,8 @@ from src.main.py.gen_py.transfer import Transfer
 
 
 class TransferHandler:
+    """A class responsible for handling data transfers."""
+
     def __init__(self):
         self.log = {}
 
@@ -28,19 +30,51 @@ class TransferHandler:
         return int(round(time.time() * 1000))
 
 
+def print_error():
+    """A function printing an error when bad arguments provided"""
+
+    print("Bad arguments provided.")
+    print("The server needs a serialisation method to be provided as program argument: binary | json | compact")
+
+
+def read_protocol(protocol_type):
+    """
+    A function returning the protocol factory based on an argument provided.
+
+    :param protocol_type: the protocol type
+    :return: the protocol factory of the required type
+    """
+
+    if protocol_type == "binary":
+        return TBinaryProtocol.TBinaryProtocolFactory()
+    elif protocol_type == "json":
+        return TJSONProtocol.TJSONProtocolFactory()
+    elif protocol_type == "compact":
+        return TCompactProtocol.TCompactProtocolFactory()
+    return None
+
+
 if __name__ == '__main__':
+    """The simple Thrift server receiving data from the Thrift client."""
+
+    if len(sys.argv) < 2:
+        print_error()
+        exit(1)
+
     handler = TransferHandler()
     processor = Transfer.Processor(handler)
     transport = TSocket.TServerSocket(host='127.0.0.1', port=9080)
     transport_factory = TTransport.TBufferedTransportFactory()
 
-    # protocol_factory = TBinaryProtocol.TBinaryProtocolFactory()
-    # protocol_factory = TJSONProtocol.TJSONProtocolFactory()
-    protocol_factory = TCompactProtocol.TCompactProtocolFactory()
+    protocol_type = sys.argv[1]
+    protocol_factory = read_protocol(protocol_type)
+    if protocol_factory is None:
+        print_error()
+        exit(1)
 
     server = TServer.TSimpleServer(processor, transport, transport_factory, protocol_factory)
 
-    print('Starting the server...')
+    print('The server is started...')
 
     try:
         server.serve()
