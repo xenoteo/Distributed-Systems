@@ -62,6 +62,7 @@ can be run using [MemoryTest.java](src/main/java/xenoteo/com/github/MemoryTest.j
 [memory_test.py](src/main/py/memory_test.py).  
 For all mentioned programs the serialisation method should be
 provided as an argument: `binary | json | compact`  
+**Warning**: server and clients should use the same serialisation method!
   
 If you use Intellij, right click on folder `gen-java` -> `Mark Directory as` -> `Generated Sources Root`.   
   
